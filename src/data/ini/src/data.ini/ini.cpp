@@ -515,6 +515,37 @@ namespace tfc
 			}
 
 
+			void INIFile::setStringValue(const std::string section, const std::string key, const std::string value)
+			{
+			}
+
+
+			void INIFile::setIntValue(const std::string section, const std::string key, int value)
+			{
+			}
+
+
+			void INIFile::setDoubleValue(const std::string section, const std::string key, double value)
+			{
+			}
+
+
+			void INIFile::setBoolValue(const std::string section, const std::string key, bool value)
+			{
+			}
+
+
+			void INIFile::setComment(std::string section, std::string key, std::string comment)
+			{
+			}
+
+
+			int INIFile::setRightComment(std::string section, const std::string key, std::string rightComment)
+			{
+				return 0;
+			}
+
+
 		};
 	};
 };
