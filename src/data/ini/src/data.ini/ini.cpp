@@ -430,6 +430,13 @@ namespace tfc
 			}
 
 
+			std::vector<std::pair<std::string, std::string>> INIFile::getEntries(std::string _section)
+			{
+				INISection section = getSection(_section);
+				return section.getEntries();
+			}
+
+
 
 		};
 	};
