@@ -3,9 +3,44 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CE80C6EC-723F-470E-8BD0-36921771095F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{5CAC430A-49A5-40EF-B3BE-27CDA0327720}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ini", "ini", "{76EE5D7C-EF01-464F-B8A5-A7AF7F32005F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C8842A25-E2D6-4015-982E-7CF41B60BE17}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{93EE47C3-8120-4F45-AE45-928A5CAC2924}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "data.ini", "src\data\ini\src\data.ini\data.ini.vcxproj", "{C1A787F7-1169-4255-917A-29A43C211B3E}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C1A787F7-1169-4255-917A-29A43C211B3E}.Debug|x64.ActiveCfg = Debug|x64
+		{C1A787F7-1169-4255-917A-29A43C211B3E}.Debug|x64.Build.0 = Debug|x64
+		{C1A787F7-1169-4255-917A-29A43C211B3E}.Debug|x86.ActiveCfg = Debug|Win32
+		{C1A787F7-1169-4255-917A-29A43C211B3E}.Debug|x86.Build.0 = Debug|Win32
+		{C1A787F7-1169-4255-917A-29A43C211B3E}.Release|x64.ActiveCfg = Release|x64
+		{C1A787F7-1169-4255-917A-29A43C211B3E}.Release|x64.Build.0 = Release|x64
+		{C1A787F7-1169-4255-917A-29A43C211B3E}.Release|x86.ActiveCfg = Release|Win32
+		{C1A787F7-1169-4255-917A-29A43C211B3E}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5CAC430A-49A5-40EF-B3BE-27CDA0327720} = {CE80C6EC-723F-470E-8BD0-36921771095F}
+		{76EE5D7C-EF01-464F-B8A5-A7AF7F32005F} = {5CAC430A-49A5-40EF-B3BE-27CDA0327720}
+		{C8842A25-E2D6-4015-982E-7CF41B60BE17} = {76EE5D7C-EF01-464F-B8A5-A7AF7F32005F}
+		{93EE47C3-8120-4F45-AE45-928A5CAC2924} = {76EE5D7C-EF01-464F-B8A5-A7AF7F32005F}
+		{C1A787F7-1169-4255-917A-29A43C211B3E} = {C8842A25-E2D6-4015-982E-7CF41B60BE17}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {17756753-2AEE-4838-905D-11B7B1F507DC}
