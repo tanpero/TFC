@@ -129,6 +129,24 @@ namespace tfc
 				return startWith(line, "#") || startWith(line, ";");
 			}
 
+
+			std::string INIFile::trimLeft(std::string line, char c)
+			{
+				int len = line.length();
+				int i = 0;
+
+				while (line[i] == c && line[i] != '\0')
+				{
+					i++;
+				}
+
+				if (i != 0)
+				{
+					return std::string(line, i, len - i);
+				}
+				return line;
+			}
+
 		};
 	};
 };
