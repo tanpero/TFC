@@ -93,6 +93,36 @@ namespace tfc
 			}
 
 
+			std::pair<std::string, std::string> INIFile::split(std::string line, std::string sep)
+			{
+				size_t pos = line.find(sep);
+				std::string left, right;
+				std::pair<std::string, std::string> pair;
+
+				if (pos != std::string::npos)
+				{
+					left = std::string(line, 0, pos);
+					right = std::string(line, pos + 1);
+
+					trim(left);
+					trim(right);
+
+					pair.first = left;
+					pair.second = right;
+				}
+				else
+				{
+					left = line;
+					right = "";
+
+					trim(left);
+
+					pair.first = left;
+					pair.second = right;
+				}
+				return pair;
+			}
+
 		};
 	};
 };
