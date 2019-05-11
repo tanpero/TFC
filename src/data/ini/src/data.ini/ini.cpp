@@ -486,6 +486,16 @@ namespace tfc
 			}
 
 
+			std::vector<std::string> INIFile::getSectionNames()
+			{
+				std::vector<std::string> sectionNames;
+				for (INISectionIterator i = sectionsCache.begin(); i != sectionsCache.end(); ++i)
+				{
+					sectionNames.push_back(i->name);
+				}
+				return sectionNames;
+			}
+
 
 		};
 	};
