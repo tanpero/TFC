@@ -497,6 +497,24 @@ namespace tfc
 			}
 
 
+			bool INIFile::hasSection(std::string section)
+			{
+				return false;
+			}
+
+
+			bool INIFile::hasKey(std::string section, std::string key)
+			{
+				return false;
+			}
+
+
+			bool INIFile::hasKey(std::string key)
+			{
+				return false;
+			}
+
+
 		};
 	};
 };
