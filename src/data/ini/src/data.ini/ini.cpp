@@ -437,6 +437,13 @@ namespace tfc
 			}
 
 
+			std::vector<INIItem> INIFile::getItems(std::string _section)
+			{
+				INISection section = getSection(_section);
+				return section.getItems();
+			}
+
+
 
 		};
 	};
