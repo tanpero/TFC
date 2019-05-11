@@ -200,6 +200,19 @@ namespace tfc
 				return false;
 			}
 
+
+			bool INIFile::compareStringIgnoreCase(std::string first, std::string second)
+			{
+				std::string a = first;
+				std::string b = second;
+
+				transform(a.begin(), a.end(), a.begin(), towupper);
+				transform(b.begin(), b.end(), b.begin(), towupper);
+
+				return a == b;
+			}
+
+
 		};
 	};
 };
