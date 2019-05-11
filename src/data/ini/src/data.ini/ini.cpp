@@ -147,6 +147,22 @@ namespace tfc
 				return line;
 			}
 
+
+			std::string INIFile::trimRight(std::string line, char c)
+			{
+				int i = 0;
+				int len = line.length();
+
+				for (i = len - 1; i >= 0; --i)
+				{
+					if (line[i] != c)
+					{
+						break;
+					}
+				}
+				return std::string(line, 0, i + 1);
+			}
+
 		};
 	};
 };

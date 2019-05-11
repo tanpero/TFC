@@ -203,7 +203,7 @@ namespace tfc
 				bool isCommentLine(std::string line);
 
 				std::string trimLeft(std::string line, char c = ' ');
-				std::string trimRighft(std::string line, char c = ' ');
+				std::string trimRight(std::string line, char c = ' ');
 				std::string trim(std::string line, char c = ' ');
 
 				bool startWith(std::string line, std::string prefix);
