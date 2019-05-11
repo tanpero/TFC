@@ -71,6 +71,16 @@ namespace tfc
 			}
 
 
+			int INIFile::addEntry(std::string cleanLine, std::string comment, std::string rightComment, INISection currSection)
+			{
+				INIItem item = parse(cleanLine);
+
+				item.comment = comment;
+				item.rightComment = rightComment;
+
+				currSection.items.push_back(item);
+				return 0;
+			}
 
 		};
 	};
