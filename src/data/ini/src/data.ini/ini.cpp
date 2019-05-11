@@ -82,6 +82,17 @@ namespace tfc
 				return 0;
 			}
 
+
+			INIItem INIFile::parse(std::string line)
+			{
+				INIItem item;
+				auto pair = split(line, "=");
+				item.key = pair.first;
+				item.value = pair.second;
+				return item;
+			}
+
+
 		};
 	};
 };
