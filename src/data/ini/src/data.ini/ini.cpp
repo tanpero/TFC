@@ -190,6 +190,16 @@ namespace tfc
 				return std::string(line, 0, i + 1);
 			}
 
+
+			bool INIFile::startWith(std::string line, std::string prefix)
+			{
+				if (strncmp(line.c_str(), prefix.c_str(), prefix.size()) == 0)
+				{
+					return true;
+				}
+				return false;
+			}
+
 		};
 	};
 };
