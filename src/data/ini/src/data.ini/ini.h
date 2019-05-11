@@ -45,6 +45,7 @@ namespace tfc
 	{
 		namespace ini
 		{
+
 			class INIException : std::exception {
 				int _errno;
 				std::string _info;
@@ -61,6 +62,7 @@ namespace tfc
 				}
 			};
 
+
 			struct INIItem
 			{
 				std::string key;
@@ -68,6 +70,7 @@ namespace tfc
 				std::string comment;  // 每个键的注释，都是指该行上方的内容
 				std::string rightComment;
 			};
+
 
 			class INISection
 			{
@@ -87,6 +90,134 @@ namespace tfc
 
 				std::vector<INIItem> getItems();
 				std::vector<std::pair<std::string, std::string>> getEntries();
+			};
+
+
+			class INIFile
+			{
+			public:
+				INIFile();
+				~INIFile();
+
+			public:
+
+				/*
+				* 基本文件操作
+				*/
+
+				int load(std::string filePath);
+				int save(std::string);
+				int saveAs(std::string);
+
+			public:
+
+				/*
+				* 获取 INI 文件内容
+				*/
+				std::string getStringValue(std::string section, std::string key);
+				std::string getStringValue(std::string key);
+
+				int getIntValue(std::string section, std::string key);
+				int getIntValue(std::string key);
+
+				double getDoubleValue(std::string section, std::string key);
+				double getDoubleValue(std::string key);
+
+				bool getBoolValue(std::string section, std::string key);
+				bool getBoolValue(std::string key);
+
+				std::vector<std::string> getKeys(std::string section);
+				std::vector<std::string> getValues(std::string section);
+				std::vector<std::pair<std::string, std::string>> getEntries(std::string section);
+				std::vector<INIItem> getItems(std::string section);
+				int getItemsLength(std::string section);
+				int getItemsLength(INISection section);
+
+				INISection getSection(std::string section);
+				std::vector<INISection> getSections();
+				std::vector<INISection> getSections(std::string section, ...);
+				std::vector<std::string> getSectionNames();
+
+			public:
+
+				/*
+				* 检测 INI 文件是否包含指定内容
+				*/
+
+				bool hasSection(std::string section);
+				bool hasKey(std::string section, std::string key);
+				bool hasKey(std::string key);
+
+			public:
+
+				/*
+				* 设置 INI 文件内容
+				*/
+
+				// 设置字符串值
+				void setStringValue(const std::string section, const std::string key, const std::string value);
+
+				// 设置整数值
+				void setIntValue(const std::string section, const std::string key, int value);
+
+				// 设置浮点值
+				void setDoubleValue(const std::string section, const std::string key, double value);
+
+				// 设置布尔值
+				void setBoolValue(const std::string section, const std::string key, bool value);
+
+				// 设置注释，如果key=""则设置段注释
+				void setComment(std::string section, std::string key, std::string comment);
+
+				// 设置行尾注释，如果key=""则设置段的行尾注释
+				int setRightComment(std::string section, const std::string key, std::string rightComment);
+
+			public:
+
+				/*
+				* 删除 INI 文件内容
+				*/
+
+				// 删除段
+				void deleteSection(std::string section);
+
+				// 删除特定段的特定项
+				void deleteKey(std::string section, std::string key);
+				void deleteKey(std::string section, INIItem item);
+				void deleteKey(INISection section, INIItem item);
+				void deleteKey(INISection section, std::string key);
+
+				//设置注释分隔符，默认为"#"
+				void setCommentDelimiter(std::string Delimiter = "#");
+
+			private:
+				std::string getValue(std::string section, std::string key);
+				void setValue(std::string section, std::string key, std::string value);
+				INISection updateSection(std::string cleanLine, std::string comment, std::string rightComment);
+				int addEntry(std::string cleanLine, std::string comment, std::string rightComment, INISection currSection);
+
+			private:
+				INIItem parse(std::string line);
+				std::pair<std::string, std::string> split(std::string line, std::string seq);
+
+				bool isCommentLine(std::string line);
+
+				std::string trimLeft(std::string line, char c = ' ');
+				std::string trimRighft(std::string line, char c = ' ');
+				std::string trim(std::string line, char c = ' ');
+
+				bool startWith(std::string line, std::string prefix);
+
+				bool compareStringIgnoreCase(std::string a, std::string b);
+
+			private:
+				void release();
+				std::vector<INISection> sectionsCache;
+				std::string path;
+
+			private:
+				using INISectionIterator = std::vector<INISection>::iterator;
+
 			};
 
 
