@@ -123,6 +123,12 @@ namespace tfc
 				return pair;
 			}
 
+
+			bool INIFile::isCommentLine(std::string line)
+			{
+				return startWith(line, "#") || startWith(line, ";");
+			}
+
 		};
 	};
 };
