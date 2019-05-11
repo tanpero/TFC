@@ -190,6 +190,9 @@ namespace tfc
 				//设置注释分隔符，默认为"#"
 				void setCommentDelimiter(std::string Delimiter = "#");
 
+			public:
+				void customBooleans(std::string b0, std::string b1);
+
 			private:
 				std::string getValue(std::string section, std::string key);
 				void setValue(std::string section, std::string key, std::string value);

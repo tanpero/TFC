@@ -6,6 +6,11 @@ namespace tfc
 	{
 		namespace ini
 		{
+			void INIFile::customBooleans(std::string b0, std::string b1)
+			{
+				beBooleans.push_back({ b0, b1 });
+			}
+
 
 			std::string INIFile::getValue(std::string section, std::string key)
 			{
@@ -226,15 +231,10 @@ namespace tfc
 
 			INIFile::INIFile()
 			{
-				std::pair<std::string, std::string> b0 = { "true", "false" };
-				std::pair<std::string, std::string> b1 = { "yes", "no" };
-				std::pair<std::string, std::string> b2 = { "on", "off" };
-				std::pair<std::string, std::string> b3 = { "0", "1" };
-
-				beBooleans.push_back(b0);
-				beBooleans.push_back(b1);
-				beBooleans.push_back(b2);
-				beBooleans.push_back(b3);
+				beBooleans.push_back({ "true", "false" });
+				beBooleans.push_back({ "yes", "no" });
+				beBooleans.push_back({ "on", "off" });
+				beBooleans.push_back({ "0", "1" });
 			}
 
 
