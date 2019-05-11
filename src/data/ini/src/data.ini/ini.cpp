@@ -394,6 +394,17 @@ namespace tfc
 			}
 
 
+			double INIFile::getDoubleValue(std::string section, std::string key)
+			{
+				return 0.0;
+			}
+
+
+			double INIFile::getDoubleValue(std::string key)
+			{
+				return 0.0;
+			}
+
 
 		};
 	};
