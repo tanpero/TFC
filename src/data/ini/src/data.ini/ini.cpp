@@ -406,6 +406,19 @@ namespace tfc
 			}
 
 
+			bool INIFile::getBoolValue(std::string section, std::string key)
+			{
+				return false;
+			}
+
+
+			bool INIFile::getBoolValue(std::string key)
+			{
+				return false;
+			}
+
+
+
 		};
 	};
 };
