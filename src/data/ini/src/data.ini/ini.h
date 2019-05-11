@@ -61,6 +61,14 @@ namespace tfc
 				}
 			};
 
+			struct INIItem
+			{
+				std::string key;
+				std::string value;
+				std::string comment;  // 每个键的注释，都是指该行上方的内容
+				std::string rightComment;
+			};
+
 
 		};
 	};
