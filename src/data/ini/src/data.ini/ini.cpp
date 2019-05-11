@@ -307,6 +307,70 @@ namespace tfc
 				return errorValue;
 			}
 
+
+			int INIFile::save(std::string)
+			{
+				return saveAs(path);
+			}
+
+
+			int INIFile::saveAs(std::string)
+			{
+				std::string data = "";
+
+				// 载入section数据
+				for (INISectionIterator sect = sectionsCache.begin(); sect != sectionsCache.end(); ++sect)
+				{
+					if (sect->comment != "")
+					{
+						data += sect->comment;
+					}
+
+					if (sect->name != "")
+					{
+						data += std::string("[") + sect->name + std::string("]");
+						data += '\n';
+					}
+
+					if (sect->rightComment != "")
+					{
+						data += " #" + sect->rightComment;
+					}
+
+					// 载入 item 数据
+					for (INISection::INIItemIterator item = sect->items.begin(); item != sect->items.end(); ++item)
+					{
+						if (item->comment != "")
+						{
+							data += item->comment;
+							if (data[data.length() - 1] != '\n')
+							{
+								data += '\n';
+							}
+						}
+
+						data += item->key + "=" + item->value;
+
+						if (item->rightComment != "")
+						{
+							data += " #" + item->rightComment;
+						}
+
+						if (data[data.length() - 1] != '\n')
+						{
+							data += '\n';
+						}
+					}
+				}
+
+				std::ofstream ofs(path);
+				ofs << data;
+				ofs.close();
+				return 0;
+			}
+
+
+
 		};
 	};
 };
