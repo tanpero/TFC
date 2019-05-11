@@ -45,6 +45,21 @@ namespace tfc
 	{
 		namespace ini
 		{
+			class INIException : std::exception {
+				int _errno;
+				std::string _info;
+			public:
+				INIException(int errtype, std::string info) : _errno(errtype), _info(info) {}
+				~INIException() {}
+				inline int errtype()
+				{
+					return _errno;
+				}
+				inline std::string info()
+				{
+					return _info;
+				}
+			};
 
 
 		};
