@@ -215,6 +215,8 @@ namespace tfc
 				std::vector<INISection> sectionsCache;
 				std::string path;
 
+				std::vector<std::pair<std::string, std::string>> beBooleans;
+
 			private:
 				using INISectionIterator = std::vector<INISection>::iterator;
 

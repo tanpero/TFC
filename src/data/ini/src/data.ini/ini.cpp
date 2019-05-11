@@ -226,6 +226,15 @@ namespace tfc
 
 			INIFile::INIFile()
 			{
+				std::pair<std::string, std::string> b0 = { "true", "false" };
+				std::pair<std::string, std::string> b1 = { "yes", "no" };
+				std::pair<std::string, std::string> b2 = { "on", "off" };
+				std::pair<std::string, std::string> b3 = { "0", "1" };
+
+				beBooleans.push_back(b0);
+				beBooleans.push_back(b1);
+				beBooleans.push_back(b2);
+				beBooleans.push_back(b3);
 			}
 
 
