@@ -418,6 +418,12 @@ namespace tfc
 			}
 
 
+			std::vector<std::string> INIFile::getKeys(std::string section)
+			{
+				return std::vector<std::string>();
+			}
+
+
 
 		};
 	};
