@@ -213,6 +213,27 @@ namespace tfc
 			}
 
 
+			void INIFile::release()
+			{
+				for (auto i = sectionsCache.begin(); i != sectionsCache.end(); ++i)
+				{
+					delete (*i);
+				}
+				sectionsCache.clear();
+				path = "";
+			}
+
+
+			INIFile::INIFile()
+			{
+			}
+
+
+			INIFile::~INIFile()
+			{
+				release();
+			}
+
 		};
 	};
 };
