@@ -234,6 +234,79 @@ namespace tfc
 				release();
 			}
 
+
+			int INIFile::load(std::string filePath)
+			{
+				int errorValue;
+				std::string line;       // 带注释的行
+				std::string cleanLine;  // 去掉注释后的行
+				std::string comment;
+				std::string rightComment;
+				INISection currSection = NULL;  // 初始化一个字段指针
+
+				release();
+
+				path = filePath;
+				std::ifstream ifs(path);
+				if (!ifs.is_open()) {
+					return ERR_OPEN_FILE_FAILED;
+				}
+
+				//增加默认段，即 无名段""
+				currSection.name = "";
+				sectionsCache.push_back(currSection);
+
+				// 每次读取一行内容到line
+				while (std::getline(ifs, line)) {
+					trim(line);
+
+					// step 0，空行处理，如果长度为0，说明是空行，添加到comment，当作是注释的一部分
+					if (line.length() <= 0) {
+						comment += '\n';
+						continue;
+					}
+
+					// step 1
+					// 如果行首不是注释，查找行尾是否存在注释
+					// 如果该行以注释开头，添加到comment，跳过当前循环，continue
+					if (isCommentLine(line)) {
+						comment += line + '\n';
+						continue;
+					}
+
+					// 如果行首不是注释，查找行尾是否存在注释，若存在，切割该行，将注释内容添加到rightComment
+					auto commentContent = split(line, "#");
+					cleanLine = commentContent.first;
+					rightComment = commentContent.second;
+
+					// step 2，判断line内容是否为段或键
+					//段开头查找 [
+					if (cleanLine[0] == '[') {
+						try
+						{
+							updateSection(cleanLine, comment, rightComment);
+							errorValue = RET_OK;
+						}
+						catch (const INIException& e)
+						{
+							errorValue = e.errtype;
+						}
+					}
+					else {
+
+						// 如果该行是键值，添加到section段的items容器
+						errorValue = addEntry(cleanLine, comment, rightComment, currSection);
+					}
+
+					// comment清零
+					comment = "";
+					rightComment = "";
+				}
+
+				ifs.close();
+				return errorValue;
+			}
+
 		};
 	};
 };
