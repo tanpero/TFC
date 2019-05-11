@@ -382,6 +382,19 @@ namespace tfc
 			}
 
 
+			int INIFile::getIntValue(std::string section, std::string key)
+			{
+				return 0;
+			}
+
+
+			int INIFile::getIntValue(std::string key)
+			{
+				return 0;
+			}
+
+
+
 		};
 	};
 };
