@@ -34,6 +34,44 @@ namespace tfc
 			}
 
 
+			INISection INIFile::updateSection(std::string cleanLine, std::string comment, std::string rightComment)
+			{
+				INISection newSection;
+
+				// 查找右中括号
+				size_t index = cleanLine.find_first_of(']');
+				if (index == std::string::npos) {
+					throw INIException(ERR_UNMATCHED_BRACKETS, std::string("no matched ] found"));
+				}
+
+				int len = index - 1;
+
+				// 若段名为空，继续下一行
+				if (len <= 0) {
+					throw INIException(ERR_SECTION_EMPTY, std::string("section name is empty"));
+				}
+
+				// 取段名
+				std::string s(cleanLine, 1, len);
+				trim(s);
+
+				//检查段是否已存在
+				if (getSection(s).name != "") {
+					throw INIException(ERR_SECTION_ALREADY_EXISTS, std::string("section ") + s + std::string("already exist"));
+				}
+
+				// 填充段名
+				newSection.name = s;
+
+				// 填充段开头的注释
+				newSection.comment = comment;
+				newSection.rightComment = rightComment;
+				sectionsCache.push_back(newSection);
+				return newSection;
+			}
+
+
+
 		};
 	};
 };
