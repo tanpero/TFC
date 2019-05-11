@@ -456,6 +456,35 @@ namespace tfc
 			}
 
 
+			INISection INIFile::getSection(std::string section)
+			{
+				for (INISectionIterator i = sectionsCache.begin(); i != sectionsCache.end(); ++i)
+				{
+					if (i->name == section)
+					{
+						return *i;
+					}
+				}
+				throw INIException(ERR_NOT_FOUND_SECTION, std::string("cannot find such section"));
+			}
+
+
+			std::vector<INISection> INIFile::getSections()
+			{
+				std::vector<INISection> sections;
+				for (INISectionIterator i = sectionsCache.begin(); i != sectionsCache.end(); ++i)
+				{
+					sections.push_back(*i);
+				}
+				return sections;
+			}
+
+
+			std::vector<INISection> INIFile::getSections(std::string section, ...)
+			{
+				return std::vector<INISection>();
+			}
+
 
 
 		};
