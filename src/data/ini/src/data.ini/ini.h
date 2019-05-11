@@ -69,6 +69,26 @@ namespace tfc
 				std::string rightComment;
 			};
 
+			class INISection
+			{
+			public:
+				using INIItemIterator = std::vector<INIItem>::iterator;  // 定义一个迭代器，即指向键元素的指针
+
+				INIItemIterator begin();
+				INIItemIterator end();
+
+				std::string name;
+				std::string comment;  // 每个段的注释，都是指该行上方的内容
+				std::string rightComment;
+				std::vector<INIItem> items;  // 键值项数组，一个段可以有多个键值，所有用vector来储存
+
+				bool hasKey(std::string key);
+				size_t length();
+
+				std::vector<INIItem> getItems();
+				std::vector<std::pair<std::string, std::string>> getEntries();
+			};
+
 
 		};
 	};
