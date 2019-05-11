@@ -444,6 +444,19 @@ namespace tfc
 			}
 
 
+			int INIFile::getItemsLength(std::string section)
+			{
+				return getSection(section).length();
+			}
+
+
+			int INIFile::getItemsLength(INISection section)
+			{
+				return section.length();
+			}
+
+
+
 
 		};
 	};
