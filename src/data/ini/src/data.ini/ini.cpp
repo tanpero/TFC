@@ -765,6 +765,24 @@ namespace tfc
 
 			void INIFile::setComment(std::string section, std::string key, std::string comment)
 			{
+				INISection sect = getSection(section);
+
+				if (key == "")
+				{
+					sect.setComment(comment);
+					return;
+				}
+
+				for (INISection::INIItemIterator it = sect.begin(); it != sect.end(); ++it)
+				{
+					if (it->key == key)
+					{
+						it->comment = comment;
+						return;
+					}
+				}
+
+				throw INIException(ERR_NOT_FOUND_KEY, "key `" + key + "` was not found");
 			}
 
 
