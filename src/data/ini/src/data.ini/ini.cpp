@@ -484,6 +484,50 @@ namespace tfc
 				return getBoolValue("", key);
 			}
 
+			bool INIFile::getBoolValueOrDefault(std::string section, std::string key, bool defaultValue)
+			{
+				bool value;
+				try
+				{
+					value = getBoolValue(section, key);
+				}
+				catch (INIException& e)
+				{
+					return defaultValue;
+				}
+				return value;
+			}
+
+			bool INIFile::getBoolValueOrDefault(std::string key, bool defaultValue)
+			{
+				return getBoolValueOrDefault("", key, defaultValue);
+			}
+
+			std::string INIFile::getComment(std::string section, std::string key)
+			{
+				INISection sect = getSection(section);
+
+				if (sect == NULL)
+				{
+					throw INIException(ERR_NOT_FOUND_SECTION, std::string("section ") + section + std::string(" was not found"));
+				}
+
+				if (key == "")
+				{
+					return sect.getComment();
+				}
+
+				for (INISection::INIItemIterator it = sect.begin(); it != sect.end(); ++it)
+				{
+					if (it->key == key)
+					{
+						return it->comment;
+					}
+				}
+
+				throw INIException(ERR_NOT_FOUND_KEY, std::string("key ") + key + std::string(" was not found"));
+			}
+
 
 			std::vector<std::string> INIFile::getKeys(std::string section)
 			{

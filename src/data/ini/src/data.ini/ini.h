@@ -152,6 +152,11 @@ namespace tfc
 
 				bool getBoolValue(std::string section, std::string key);
 				bool getBoolValue(std::string key);
+				bool getBoolValueOrDefault(std::string section, std::string key, bool defaultValue);
+				bool getBoolValueOrDefault(std::string key, bool defaultValue);
+
+
+				std::string getComment(std::string section, std::string key);
 
 
 				std::vector<std::string> getKeys(std::string section);
