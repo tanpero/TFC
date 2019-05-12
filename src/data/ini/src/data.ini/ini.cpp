@@ -507,11 +507,6 @@ namespace tfc
 			{
 				INISection sect = getSection(section);
 
-				if (sect == NULL)
-				{
-					throw INIException(ERR_NOT_FOUND_SECTION, std::string("section ") + section + std::string(" was not found"));
-				}
-
 				if (key == "")
 				{
 					return sect.getComment();
@@ -525,7 +520,7 @@ namespace tfc
 					}
 				}
 
-				throw INIException(ERR_NOT_FOUND_KEY, std::string("key ") + key + std::string(" was not found"));
+				throw INIException(ERR_NOT_FOUND_KEY, std::string("key `") + key + std::string("` was not found"));
 			}
 
 
@@ -576,7 +571,7 @@ namespace tfc
 						return *i;
 					}
 				}
-				throw INIException(ERR_NOT_FOUND_SECTION, std::string("cannot find such section"));
+				throw INIException(ERR_NOT_FOUND_SECTION, std::string("section `") + section + std::string("` was not found"));
 			}
 
 
