@@ -222,11 +222,14 @@ namespace tfc
 				void deleteKey(INISection section, INIItem item);
 				void deleteKey(INISection section, std::string key);
 
-				//设置注释分隔符，默认为"#"
-				void setCommentDelimiter(std::string Delimiter = "#");
-
 			public:
 				void customBooleans(std::string b0, std::string b1);
+#define _DEBUG_DATA_INI_
+#ifdef _DEBUG_DATA_INI_
+
+				void print();
+				
+#endif // _DEBUG_DATA_INI_
 
 			private:
 				ININativeValue getValue(std::string section, std::string key);

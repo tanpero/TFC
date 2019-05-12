@@ -11,6 +11,40 @@ namespace tfc
 				beBooleans.push_back({ b0, b1 });
 			}
 
+#ifdef _DEBUG_DATA_INI_
+
+			void INIFile::print()
+			{
+				printf("############ print start ############\n");
+				printf("filePath:[%s]\n", path.c_str());
+				printf("commentDelimiter:[%s]\n", "`#` `;`");
+
+				for (INISectionIterator it = sectionsCache.begin(); it != sectionsCache.end(); ++it)
+				{
+					printf("comment :[\n%s]\n", it->getComment().c_str());
+					printf("section :\n[%s]\n", it->getName().c_str());
+					if (it->getRightComment() != "")
+					{
+						printf("rightComment:\n%s", it->getRightComment().c_str());
+					}
+
+					for (INISection::INIItemIterator i = it->getItems().begin(); i != it->>getItems().end(); ++i)
+					{
+						printf("    comment :[\n%s]\n", i->comment.c_str());
+						printf("    parm    :%s=%s\n", i->key.c_str(), i->value.c_str());
+						if (i->rightComment != "")
+						{
+							printf("    rcomment:[\n%s]\n", i->rightComment.c_str());
+						}
+					}
+				}
+
+				printf("############ print end ############\n");
+				return;
+			}
+
+#endif // _DEBUG_DATA_INI_
+
 
 			ININativeValue INIFile::getValue(std::string section, std::string key)
 			{
@@ -97,7 +131,6 @@ namespace tfc
 				item.comment = comt;
 
 				sect.pushItem(item);
-
 			}
 
 
