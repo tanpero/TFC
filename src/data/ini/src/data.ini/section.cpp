@@ -66,6 +66,11 @@ namespace tfc
 				items.push_back(item);
 			}
 
+			INISection::INIItemIterator INISection::eraseItem(INIItemIterator item)
+			{
+				return items.erase(item);
+			}
+
 			std::vector<std::pair<std::string, std::string>> INISection::getEntries()
 			{
 				std::vector<std::pair<std::string, std::string>> entries;

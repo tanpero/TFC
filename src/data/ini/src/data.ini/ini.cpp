@@ -825,6 +825,32 @@ namespace tfc
 				}
 			}
 
+			void INIFile::deleteKey(std::string section, std::string key)
+			{
+				INISection sect;
+				try
+				{
+					sect = getSection(section);
+				}
+				catch (const std::exception&)
+				{
+					return;
+				}
+
+				for (INISection::INIItemIterator it = sect.begin(); it != sect.end();)
+				{
+					if (it->key == key)
+					{
+						it = sect.eraseItem(it);
+						break;
+					}
+					else
+					{
+						it++;
+					}
+				}
+			}
+
 
 		};
 	};

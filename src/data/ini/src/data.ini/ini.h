@@ -107,6 +107,7 @@ namespace tfc
 
 				std::vector<INIItem> getItems();
 				void pushItem(INIItem item);
+				INIItemIterator eraseItem(INIItemIterator item);
 
 				std::vector<std::pair<std::string, std::string>> getEntries();
 				std::vector<std::string> getKeys();
