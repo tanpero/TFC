@@ -99,7 +99,15 @@ namespace tfc
 				size_t length();
 
 				std::string getName();
+				void setName(std::string _name);
+				std::string getComment();
+				void setComment(std::string _comment);
+				std::string getRightComment();
+				void setRightComment(std::string _rightComment);
+
 				std::vector<INIItem> getItems();
+				void pushItem(INIItem item);
+
 				std::vector<std::pair<std::string, std::string>> getEntries();
 				std::vector<std::string> getKeys();
 				std::vector<std::string> getValues();

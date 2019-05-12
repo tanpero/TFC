@@ -74,7 +74,7 @@ namespace tfc
 				}
 
 				// Ìî³ä¶ÎÃû
-				newSection.name = s;
+				newSection.getName() = s;
 
 				// Ìî³ä¶Î¿ªÍ·µÄ×¢ÊÍ
 				newSection.comment = comment;
@@ -511,7 +511,12 @@ namespace tfc
 
 			std::vector<INISection> INIFile::getSections(std::string section, ...)
 			{
-				return std::vector<INISection>();
+				std::vector<INISection> sections;
+				for (INISectionIterator i = sectionsCache.begin(); i != sectionsCache.end(); ++i)
+				{
+					sections.push_back(*i);
+				}
+				return sections;
 			}
 
 

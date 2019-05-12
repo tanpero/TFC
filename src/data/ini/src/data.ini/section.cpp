@@ -31,9 +31,39 @@ namespace tfc
 				return name;
 			}
 
+			void INISection::setName(std::string _name)
+			{
+				name = _name;
+			}
+
+			std::string INISection::getComment()
+			{
+				return comment;
+			}
+
+			void INISection::setComment(std::string _comment)
+			{
+				comment = _comment;
+			}
+
+			std::string INISection::getRightComment()
+			{
+				return rightComment;
+			}
+
+			void INISection::setRightComment(std::string _rightComment)
+			{
+				rightComment = _rightComment;
+			}
+
 			std::vector<INIItem> INISection::getItems()
 			{
 				return items;
+			}
+
+			void INISection::pushItem(INIItem item)
+			{
+				items.push_back(item);
 			}
 
 			std::vector<std::pair<std::string, std::string>> INISection::getEntries()
