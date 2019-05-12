@@ -786,9 +786,26 @@ namespace tfc
 			}
 
 
-			int INIFile::setRightComment(std::string section, const std::string key, std::string rightComment)
+			void INIFile::setRightComment(std::string section, const std::string key, std::string rightComment)
 			{
-				return 0;
+				INISection sect = getSection(section);
+
+				if (key == "")
+				{
+					sect.setRightComment(rightComment);
+					return;
+				}
+
+				for (INISection::INIItemIterator it = sect.begin(); it != sect.end(); ++it)
+				{
+					if (it->key == key)
+					{
+						it->rightComment = rightComment;
+						return;
+					}
+				}
+
+				throw INIException(ERR_NOT_FOUND_KEY, "key `" + key + "` was not found");
 			}
 
 

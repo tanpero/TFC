@@ -204,7 +204,7 @@ namespace tfc
 				void setComment(std::string section, std::string key, std::string comment);
 
 				// 设置行尾注释，如果key=""则设置段的行尾注释
-				int setRightComment(std::string section, const std::string key, std::string rightComment);
+				void setRightComment(std::string section, const std::string key, std::string rightComment);
 
 			public:
 
