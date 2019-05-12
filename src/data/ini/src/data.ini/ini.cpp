@@ -730,21 +730,36 @@ namespace tfc
 
 			void INIFile::setStringValue(const std::string section, const std::string key, const std::string value)
 			{
+				setValue(section, key, value);
 			}
 
 
 			void INIFile::setIntValue(const std::string section, const std::string key, int value)
 			{
+				char buf[64] = { 0 };
+				snprintf(buf, sizeof(buf), "%d", value);
+				setValue(section, key, buf);
 			}
 
 
 			void INIFile::setDoubleValue(const std::string section, const std::string key, double value)
 			{
+				char buf[64] = { 0 };
+				snprintf(buf, sizeof(buf), "%f", value);
+				return setValue(section, key, buf);
 			}
 
 
 			void INIFile::setBoolValue(const std::string section, const std::string key, bool value)
 			{
+				if (value)
+				{
+					setValue(section, key, "true");
+				}
+				else
+				{
+					setValue(section, key, "false");
+				}
 			}
 
 
