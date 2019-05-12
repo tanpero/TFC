@@ -808,6 +808,23 @@ namespace tfc
 				throw INIException(ERR_NOT_FOUND_KEY, "key `" + key + "` was not found");
 			}
 
+			void INIFile::deleteSection(std::string section)
+			{
+				for (INISectionIterator it = sectionsCache.begin(); it != sectionsCache.end(); )
+				{
+					if (it->getName() == section)
+					{
+						delete *it;
+						it = sectionsCache.erase(it);
+						break;
+					}
+					else
+					{
+						it++;
+					}
+				}
+			}
+
 
 		};
 	};
