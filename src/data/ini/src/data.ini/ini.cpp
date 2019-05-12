@@ -69,16 +69,16 @@ namespace tfc
 				}
 
 				//检查段是否已存在
-				if (getSection(s).name != "") {
+				if (getSection(s).getName() != "") {
 					throw INIException(ERR_SECTION_ALREADY_EXISTS, std::string("section ") + s + std::string("already exist"));
 				}
 
 				// 填充段名
-				newSection.getName() = s;
+				newSection.setName(s);
 
 				// 填充段开头的注释
-				newSection.comment = comment;
-				newSection.rightComment = rightComment;
+				newSection.setComment(comment);
+				newSection.setRightComment(rightComment);
 				sectionsCache.push_back(newSection);
 				return newSection;
 			}
@@ -91,7 +91,7 @@ namespace tfc
 				item.comment = comment;
 				item.rightComment = rightComment;
 
-				currSection.items.push_back(item);
+				currSection.pushItem(item);
 				return 0;
 			}
 
@@ -270,7 +270,7 @@ namespace tfc
 				}
 
 				//增加默认段，即 无名段""
-				currSection.name = "";
+				currSection.setName("");
 				sectionsCache.push_back(currSection);
 
 				// 每次读取一行内容到line
@@ -338,24 +338,24 @@ namespace tfc
 				// 载入section数据
 				for (INISectionIterator sect = sectionsCache.begin(); sect != sectionsCache.end(); ++sect)
 				{
-					if (sect->comment != "")
+					if (sect->getComment() != "")
 					{
-						data += sect->comment;
+						data += sect->getComment();
 					}
 
-					if (sect->name != "")
+					if (sect->getName() != "")
 					{
-						data += std::string("[") + sect->name + std::string("]");
+						data += std::string("[") + sect->getName() + std::string("]");
 						data += '\n';
 					}
 
-					if (sect->rightComment != "")
+					if (sect->getRightComment() != "")
 					{
-						data += " #" + sect->rightComment;
+						data += " #" + sect->getRightComment();
 					}
 
 					// 载入 item 数据
-					for (INISection::INIItemIterator item = sect->items.begin(); item != sect->items.end(); ++item)
+					for (INISection::INIItemIterator item = sect->getItems().begin(); item != sect->getItems().end(); ++item)
 					{
 						if (item->comment != "")
 						{
