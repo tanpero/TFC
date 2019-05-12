@@ -12,9 +12,10 @@ namespace tfc
 			}
 
 
-			std::string INIFile::getValue(std::string section, std::string key)
+			ININativeValue INIFile::getValue(std::string section, std::string key)
 			{
 				INISection sect;
+				ININativeValue nativeValue;
 
 				try
 				{
@@ -25,17 +26,16 @@ namespace tfc
 					throw INIException(e.errtype(), e.info());
 				}
 
-				for (INISection::INIItem_it it = sect->begin(); it != sect->end(); ++it) {
+				for (INISection::INIItemIterator it = sect.begin(); it != sect.end(); ++it) {
 					if (it->key == key)
 					{
-						*value = it->value;
-						*comment = it->comment;
-						return RET_OK;
+						nativeValue.value = it->value;
+						nativeValue.comment = it->comment;
+						return nativeValue;
 					}
 				}
 
-				errMsg = std::string("not find the key ") + key;
-				return ERR_NOT_FOUND_KEY;
+				throw INIException(ERR_NOT_FOUND_KEY, std::string("not found key `") + key + "`");
 			}
 
 
@@ -45,6 +45,7 @@ namespace tfc
 
 				// 查找右中括号
 				size_t index = cleanLine.find_first_of(']');
+
 				if (index == std::string::npos) {
 					throw INIException(ERR_UNMATCHED_BRACKETS, std::string("no matched ] found"));
 				}
@@ -59,6 +60,13 @@ namespace tfc
 				// 取段名
 				std::string s(cleanLine, 1, len);
 				trim(s);
+
+				// 段名不允许为空
+
+				if (s == "")
+				{
+					throw INIException(ERR_SECTION_ALREADY_EXISTS, "invalid empty section name");
+				}
 
 				//检查段是否已存在
 				if (getSection(s).name != "") {
@@ -251,7 +259,7 @@ namespace tfc
 				std::string cleanLine;  // 去掉注释后的行
 				std::string comment;
 				std::string rightComment;
-				INISection currSection = NULL;  // 初始化一个字段指针
+				INISection currSection;  // 初始化一个字段指针
 
 				release();
 
@@ -296,9 +304,9 @@ namespace tfc
 							updateSection(cleanLine, comment, rightComment);
 							errorValue = RET_OK;
 						}
-						catch (const INIException& e)
+						catch (INIException& e)
 						{
-							errorValue = e.errtype;
+							errorValue = e.errtype();
 						}
 					}
 					else {
@@ -381,49 +389,61 @@ namespace tfc
 
 			std::string INIFile::getStringValue(std::string section, std::string key)
 			{
-				return getValue(section, key);
+				return getValue(section, key).value;
 			}
 
 
 			std::string INIFile::getStringValue(std::string key)
 			{
-				return std::string();
+				return getValue("", key).value;
 			}
 
 
 			int INIFile::getIntValue(std::string section, std::string key)
 			{
-				return 0;
+				return atoi(getValue(section, key).value.data());
 			}
 
 
 			int INIFile::getIntValue(std::string key)
 			{
-				return 0;
+				return getIntValue("", key);
 			}
 
 
 			double INIFile::getDoubleValue(std::string section, std::string key)
 			{
-				return 0.0;
+				return atof(getValue(section, key).value.data());
 			}
 
 
 			double INIFile::getDoubleValue(std::string key)
 			{
-				return 0.0;
+				return getDoubleValue("", key);
 			}
 
 
 			bool INIFile::getBoolValue(std::string section, std::string key)
 			{
-				return false;
+				std::string value = getValue(section, key).value;
+				for (auto i = beBooleans.begin(); i != beBooleans.end(); ++i)
+				{
+					if (value == i->first)
+					{
+						return true;
+					}
+					else if (value == i->second)
+					{
+						return false;
+					}
+				}
+				throw INIException(ERR_PARSE_KEY_VALUE_FAILED, value + "is not an expected boolean value");
 			}
 
 
 			bool INIFile::getBoolValue(std::string key)
 			{
-				return false;
+				return getBoolValue("", key);
 			}
 
 

@@ -63,6 +63,14 @@ namespace tfc
 			};
 
 
+			// 分别存储解析得到的值和注释
+			struct ININativeValue
+			{
+				std::string value;
+				std::string comment;
+			};
+
+
 			struct INIItem
 			{
 				std::string key;
@@ -194,7 +202,7 @@ namespace tfc
 				void customBooleans(std::string b0, std::string b1);
 
 			private:
-				std::string getValue(std::string section, std::string key);
+				ININativeValue getValue(std::string section, std::string key);
 				void setValue(std::string section, std::string key, std::string value);
 				INISection updateSection(std::string cleanLine, std::string comment, std::string rightComment);
 				int addEntry(std::string cleanLine, std::string comment, std::string rightComment, INISection currSection);
@@ -217,6 +225,7 @@ namespace tfc
 				void release();
 				std::vector<INISection> sectionsCache;
 				std::string path;
+				INISection defaultSection;
 
 				std::vector<std::pair<std::string, std::string>> beBooleans;
 
