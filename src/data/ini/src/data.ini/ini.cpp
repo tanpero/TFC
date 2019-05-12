@@ -399,6 +399,22 @@ namespace tfc
 			}
 
 
+			std::string INIFile::getStringValueOrDefault(std::string section, std::string key, std::string defaultValue)
+			{
+				std::string s = getStringValue(section, key);
+				if (s == "")
+				{
+					return defaultValue;
+				}
+				return s;
+			}
+
+			std::string INIFile::getStringValueOrDefault(std::string key, std::string defaultValue)
+			{
+				return getStringValueOrDefault("", key, defaultValue);
+			}
+
+
 			int INIFile::getIntValue(std::string section, std::string key)
 			{
 				return atoi(getValue(section, key).value.data());
@@ -408,6 +424,16 @@ namespace tfc
 			int INIFile::getIntValue(std::string key)
 			{
 				return getIntValue("", key);
+			}
+
+			int INIFile::getIntValueOrDefault(std::string section, std::string key, int defaultValue)
+			{
+				return getIntValue(section, key) || defaultValue;
+			}
+
+			int INIFile::getIntValueOrDefault(std::string key, int defaultValue)
+			{
+				return getIntValueOrDefault("", key, defaultValue);
 			}
 
 
@@ -420,6 +446,16 @@ namespace tfc
 			double INIFile::getDoubleValue(std::string key)
 			{
 				return getDoubleValue("", key);
+			}
+
+			double INIFile::getDoubleValueOrDefault(std::string section, std::string key, double defaultValue)
+			{
+				return getDoubleValue(section, key) || defaultValue;
+			}
+
+			double INIFile::getDoubleValueOrDefault(std::string key, double defaultValue)
+			{
+				return getDoubleValueOrDefault("", key, defaultValue);
 			}
 
 
