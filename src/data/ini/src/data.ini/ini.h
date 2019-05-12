@@ -157,6 +157,7 @@ namespace tfc
 
 
 				std::string getComment(std::string section, std::string key);
+				std::string getRightComment(std::string section, std::string key);
 
 
 				std::vector<std::string> getKeys(std::string section);

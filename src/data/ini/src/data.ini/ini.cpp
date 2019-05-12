@@ -523,6 +523,26 @@ namespace tfc
 				throw INIException(ERR_NOT_FOUND_KEY, std::string("key `") + key + std::string("` was not found"));
 			}
 
+			std::string INIFile::getRightComment(std::string section, std::string key)
+			{
+				INISection sect = getSection(section);
+
+				if (key == "")
+				{
+					return sect.getRightComment();
+				}
+
+				for (INISection::INIItemIterator it = sect.begin(); it != sect.end(); ++it)
+				{
+					if (it->key == key)
+					{
+						return sect.getRightComment();
+					}
+				}
+
+				throw INIException(ERR_NOT_FOUND_KEY, std::string("key `") + key + std::string("` was not found"));
+			}
+
 
 			std::vector<std::string> INIFile::getKeys(std::string section)
 			{
