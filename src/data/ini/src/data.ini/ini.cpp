@@ -425,7 +425,9 @@ namespace tfc
 
 			bool INIFile::getBoolValue(std::string section, std::string key)
 			{
-				std::string value = getValue(section, key).value;
+				std::string value;
+				
+				getValue(section, key).value;
 				for (auto i = beBooleans.begin(); i != beBooleans.end(); ++i)
 				{
 					if (value == i->first)

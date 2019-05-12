@@ -137,15 +137,24 @@ namespace tfc
 				*/
 				std::string getStringValue(std::string section, std::string key);
 				std::string getStringValue(std::string key);
+				std::string getStringValueOrDefault(std::string section, std::string key, std::string defaultValue);
+				std::string getStringValueOrDefault(std::string key, std::string defaultValue);
 
 				int getIntValue(std::string section, std::string key);
 				int getIntValue(std::string key);
+				std::string getIntValueOrDefault(std::string section, std::string key, std::string defaultValue);
+				std::string getIntValueOrDefault(std::string key, std::string defaultValue);
 
 				double getDoubleValue(std::string section, std::string key);
 				double getDoubleValue(std::string key);
+				std::string getDoubleValueOrDefault(std::string section, std::string key, std::string defaultValue);
+				std::string getDoubleValueOrDefault(std::string key, std::string defaultValue);
 
 				bool getBoolValue(std::string section, std::string key);
 				bool getBoolValue(std::string key);
+				std::string getDoubleValueOrDefault(std::string section, std::string key, std::string defaultValue);
+				std::string getDoubleValueOrDefault(std::string key, std::string defaultValue);
+
 
 				std::vector<std::string> getKeys(std::string section);
 				std::vector<std::string> getValues(std::string section);
