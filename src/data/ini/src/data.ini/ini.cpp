@@ -28,7 +28,7 @@ namespace tfc
 						printf("rightComment:\n%s", it->getRightComment().c_str());
 					}
 
-					for (INISection::INIItemIterator i = it->getItems().begin(); i != it->>getItems().end(); ++i)
+					for (INISection::INIItemIterator i = it->getItems().begin(); i != it->getItems().end(); ++i)
 					{
 						printf("    comment :[\n%s]\n", i->comment.c_str());
 						printf("    parm    :%s=%s\n", i->key.c_str(), i->value.c_str());
@@ -335,10 +335,6 @@ namespace tfc
 
 			void INIFile::release()
 			{
-				for (auto i = sectionsCache.begin(); i != sectionsCache.end(); ++i)
-				{
-					delete (*i);
-				}
 				sectionsCache.clear();
 				path = "";
 			}
@@ -848,7 +844,6 @@ namespace tfc
 				{
 					if (it->getName() == section)
 					{
-						delete *it;
 						it = sectionsCache.erase(it);
 						break;
 					}
