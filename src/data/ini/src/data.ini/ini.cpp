@@ -79,6 +79,25 @@ namespace tfc
 						sectionsCache.push_back(sect);
 					}
 				}
+
+				for (INISection::INIItemIterator it = sect.begin(); it != sect.end(); ++it)
+				{
+					if (it->key == key)
+					{
+						it->value = value;
+						it->comment = comt;
+						return;
+					}
+				}
+
+				// 没有发现 key
+				INIItem item;
+				item.key = key;
+				item.value = value;
+				item.comment = comt;
+
+				sect.pushItem(item);
+
 			}
 
 
