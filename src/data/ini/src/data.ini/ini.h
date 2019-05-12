@@ -229,7 +229,9 @@ namespace tfc
 
 			private:
 				ININativeValue getValue(std::string section, std::string key);
+				void setValue(std::string section, std::string key, std::string value, std::string comment);
 				void setValue(std::string section, std::string key, std::string value);
+				void setValue(std::string key, std::string value);
 				INISection updateSection(std::string cleanLine, std::string comment, std::string rightComment);
 				int addEntry(std::string cleanLine, std::string comment, std::string rightComment, INISection currSection);
 

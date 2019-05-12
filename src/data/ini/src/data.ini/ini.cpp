@@ -39,6 +39,61 @@ namespace tfc
 			}
 
 
+			void INIFile::setValue(std::string section, std::string key, std::string value, std::string comment)
+			{
+				INISection sect;
+				std::string comt = comment;
+
+				if (comt != "")
+				{
+					comt = '\n' + comt;
+				}
+
+				try
+				{
+					sect = getSection(section);
+				}
+				catch (const std::exception&)
+				{
+
+					//如果段不存在，新建一个
+					try
+					{
+						sect = INISection();
+					}
+					catch (const std::exception&)
+					{
+						throw INIException(ERR_NO_ENOUGH_MEMORY, "no enough memory");
+					}
+					
+
+					sect.setName(section);
+					if (sect.getName() == "")
+					{
+
+						// 确保空section始终位于首位
+						sectionsCache.insert(sectionsCache.begin(), sect);
+					}
+					else
+					{
+						sectionsCache.push_back(sect);
+					}
+				}
+			}
+
+
+			void INIFile::setValue(std::string section, std::string key, std::string value)
+			{
+				setValue(section, key, value, "");
+			}
+
+
+			void INIFile::setValue(std::string key, std::string value)
+			{
+				setValue("", key, value);
+			}
+
+
 			INISection INIFile::updateSection(std::string cleanLine, std::string comment, std::string rightComment)
 			{
 				INISection newSection;
@@ -630,19 +685,27 @@ namespace tfc
 
 			bool INIFile::hasSection(std::string section)
 			{
-				return false;
+				try
+				{
+					getSection(section);
+				}
+				catch (INIException&)
+				{
+					return false;
+				}
+				return true;
 			}
 
 
 			bool INIFile::hasKey(std::string section, std::string key)
 			{
-				return false;
+				return getSection(section).hasKey(key);
 			}
 
 
 			bool INIFile::hasKey(std::string key)
 			{
-				return false;
+				return hasKey("", key);
 			}
 
 
