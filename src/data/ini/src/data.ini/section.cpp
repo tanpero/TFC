@@ -44,6 +44,26 @@ namespace tfc
 				return entries;
 			}
 
+			std::vector<std::string> INISection::getKeys()
+			{
+				std::vector<std::string> keys;
+				for (INISection::INIItemIterator i = this->begin(); i != this->end(); ++i)
+				{
+					keys.push_back(i->key);
+				}
+				return keys;
+			}
+
+			std::vector<std::string> INISection::getValues()
+			{
+				std::vector<std::string> values;
+				for (INISection::INIItemIterator i = this->begin(); i != this->end(); ++i)
+				{
+					values.push_back(i->value);
+				}
+				return values;
+			}
+
 		};
 	};
 };

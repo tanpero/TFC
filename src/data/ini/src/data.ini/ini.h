@@ -100,6 +100,8 @@ namespace tfc
 
 				std::vector<INIItem> getItems();
 				std::vector<std::pair<std::string, std::string>> getEntries();
+				std::vector<std::string> getKeys();
+				std::vector<std::string> getValues();
 			};
 
 
