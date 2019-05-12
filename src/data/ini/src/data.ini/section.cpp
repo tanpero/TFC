@@ -6,6 +6,15 @@ namespace tfc
 	{
 		namespace ini
 		{
+			INISection::INIItemIterator INISection::begin()
+			{
+				return items.begin();
+			}
+
+			INISection::INIItemIterator INISection::end()
+			{
+				return items.end();
+			}
 
 			bool INISection::hasKey(std::string key)
 			{
@@ -19,11 +28,6 @@ namespace tfc
 
 			std::vector<INIItem> INISection::getItems()
 			{
-				std::vector<INIItem> items;
-				for (INISection::INIItemIterator i = this->begin(); i != this->end(); ++i)
-				{
-					items.push_back(*i);
-				}
 				return items;
 			}
 

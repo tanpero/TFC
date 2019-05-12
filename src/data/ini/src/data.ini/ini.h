@@ -88,11 +88,13 @@ namespace tfc
 				INIItemIterator begin();
 				INIItemIterator end();
 
+			private:
 				std::string name;
 				std::string comment;  // 每个段的注释，都是指该行上方的内容
 				std::string rightComment;
 				std::vector<INIItem> items;  // 键值项数组，一个段可以有多个键值，所有用vector来储存
 
+			public:
 				bool hasKey(std::string key);
 				size_t length();
 

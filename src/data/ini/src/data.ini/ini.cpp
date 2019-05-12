@@ -449,7 +449,13 @@ namespace tfc
 
 			std::vector<std::string> INIFile::getKeys(std::string section)
 			{
-				return std::vector<std::string>();
+				std::vector<std::string> keys;
+				auto target = getSection(section).getItems();
+				for (INISection::INIItemIterator i = target.begin(); i != target.end(); ++i)
+				{
+					keys.push_back(i->key);
+				}
+				return keys;
 			}
 
 
