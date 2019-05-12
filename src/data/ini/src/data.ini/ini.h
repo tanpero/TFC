@@ -98,6 +98,7 @@ namespace tfc
 				bool hasKey(std::string key);
 				size_t length();
 
+				std::string getName();
 				std::vector<INIItem> getItems();
 				std::vector<std::pair<std::string, std::string>> getEntries();
 				std::vector<std::string> getKeys();

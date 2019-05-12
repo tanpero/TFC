@@ -26,6 +26,11 @@ namespace tfc
 				return items.size();
 			}
 
+			std::string INISection::getName()
+			{
+				return name;
+			}
+
 			std::vector<INIItem> INISection::getItems()
 			{
 				return items;

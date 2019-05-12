@@ -489,7 +489,7 @@ namespace tfc
 			{
 				for (INISectionIterator i = sectionsCache.begin(); i != sectionsCache.end(); ++i)
 				{
-					if (i->name == section)
+					if (i->getName() == section)
 					{
 						return *i;
 					}
@@ -520,7 +520,7 @@ namespace tfc
 				std::vector<std::string> sectionNames;
 				for (INISectionIterator i = sectionsCache.begin(); i != sectionsCache.end(); ++i)
 				{
-					sectionNames.push_back(i->name);
+					sectionNames.push_back(i->getName());
 				}
 				return sectionNames;
 			}
