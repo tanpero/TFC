@@ -808,6 +808,7 @@ namespace tfc
 				throw INIException(ERR_NOT_FOUND_KEY, "key `" + key + "` was not found");
 			}
 
+
 			void INIFile::deleteSection(std::string section)
 			{
 				for (INISectionIterator it = sectionsCache.begin(); it != sectionsCache.end(); )
@@ -824,6 +825,7 @@ namespace tfc
 					}
 				}
 			}
+
 
 			void INIFile::deleteKey(std::string section, std::string key)
 			{
@@ -849,6 +851,24 @@ namespace tfc
 						it++;
 					}
 				}
+			}
+
+
+			void INIFile::deleteKey(std::string section, INIItem item)
+			{
+				deleteKey(section, item.key);
+			}
+
+
+			void INIFile::deleteKey(INISection section, INIItem item)
+			{
+				deleteKey(section.getName(), item.key);
+			}
+
+
+			void INIFile::deleteKey(INISection section, std::string key)
+			{
+				deleteKey(section.getName(), key);
 			}
 
 
