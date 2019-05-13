@@ -11,8 +11,6 @@ namespace tfc
 				beBooleans.push_back({ b0, b1 });
 			}
 
-#ifdef _DEBUG_DATA_INI_
-
 			void INIFile::print()
 			{
 				printf("############ print start ############\n");
@@ -43,26 +41,19 @@ namespace tfc
 				return;
 			}
 
-#endif // _DEBUG_DATA_INI_
-
 
 			ININativeValue INIFile::getValue(std::string section, std::string key)
 			{
 				INISection sect;
 				ININativeValue nativeValue;
+				
+				sect = getSection(section);
 
-				try
+				for (auto it = sect.begin(); it != sect.end(); ++it)
 				{
-					sect = getSection(section);
-				}
-				catch (INIException& e)
-				{
-					throw INIException(e.errtype(), e.info());
-				}
-
-				for (INISection::INIItemIterator it = sect.begin(); it != sect.end(); ++it) {
 					if (it->key == key)
 					{
+						std::cout << it->key << std::endl;
 						nativeValue.value = it->value;
 						nativeValue.comment = it->comment;
 						return nativeValue;
@@ -148,6 +139,7 @@ namespace tfc
 
 			INISection INIFile::updateSection(std::string cleanLine, std::string comment, std::string rightComment)
 			{
+				debug()
 				INISection newSection;
 
 				// 查找右中括号
@@ -169,15 +161,9 @@ namespace tfc
 				trim(s);
 
 				// 段名不允许为空
-
 				if (s == "")
 				{
 					throw INIException(ERR_SECTION_ALREADY_EXISTS, "invalid empty section name");
-				}
-
-				//检查段是否已存在
-				if (getSection(s).getName() != "") {
-					throw INIException(ERR_SECTION_ALREADY_EXISTS, std::string("section ") + s + std::string("already exist"));
 				}
 
 				// 填充段名
@@ -191,15 +177,14 @@ namespace tfc
 			}
 
 
-			int INIFile::addEntry(std::string cleanLine, std::string comment, std::string rightComment, INISection currSection)
+			INIItem INIFile::addEntry(std::string cleanLine, std::string comment, std::string rightComment)
 			{
 				INIItem item = parse(cleanLine);
 
 				item.comment = comment;
 				item.rightComment = rightComment;
 
-				currSection.pushItem(item);
-				return 0;
+				return item;
 			}
 
 
@@ -357,6 +342,7 @@ namespace tfc
 
 			int INIFile::load(std::string filePath)
 			{
+				debug();
 				int errorValue;
 				std::string line;       // 带注释的行
 				std::string cleanLine;  // 去掉注释后的行
@@ -413,10 +399,12 @@ namespace tfc
 						}
 					}
 					else {
-
+						std::cout << "errorValue = addEntry(cleanLine, comment, rightComment, currSection);" << std::endl;
 						// 如果该行是键值，添加到section段的items容器
-						errorValue = addEntry(cleanLine, comment, rightComment, currSection);
+						currSection.pushItem(addEntry(cleanLine, comment, rightComment));
 					}
+
+					sectionsCache.push_back(currSection);
 
 					// comment清零
 					comment = "";
@@ -683,17 +671,25 @@ namespace tfc
 			{
 				return section.length();
 			}
-
+			
 
 			INISection INIFile::getSection(std::string section)
 			{
+				debug();
+				std::cout << "---- INIFile::getSection ----" << std::endl;
+				std::cout << sectionsCache.size() << std::endl;
+				std::cout << sectionsCache.at(1).getKeys().size() << std::endl;
 				for (INISectionIterator i = sectionsCache.begin(); i != sectionsCache.end(); ++i)
 				{
+					std::cout << section << std::endl;
+					std::cout << i->getValues().size() << std::endl;
 					if (i->getName() == section)
 					{
+						std::cout << i->getKeys().size() << std::endl;
 						return *i;
 					}
 				}
+				debug();
 				throw INIException(ERR_NOT_FOUND_SECTION, std::string("section `") + section + std::string("` was not found"));
 			}
 

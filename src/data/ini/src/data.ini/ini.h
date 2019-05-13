@@ -1,6 +1,9 @@
 #pragma once
+
 #ifndef _TFC_DATA_FORMAT_INI_INI_H_
 #define _TFC_DATA_FORMAT_INI_INI_H_
+
+#define debug() std::cout << __func__ << std::endl;
 
 #define RET_OK 0
 
@@ -224,12 +227,12 @@ namespace tfc
 
 			public:
 				void customBooleans(std::string b0, std::string b1);
-#define _DEBUG_DATA_INI_
-#ifdef _DEBUG_DATA_INI_
+
+//#ifdef _DEBUG_DATA_INI_
 
 				void print();
 				
-#endif // _DEBUG_DATA_INI_
+//#endif // _DEBUG_DATA_INI_
 
 			private:
 				ININativeValue getValue(std::string section, std::string key);
@@ -237,7 +240,7 @@ namespace tfc
 				void setValue(std::string section, std::string key, std::string value);
 				void setValue(std::string key, std::string value);
 				INISection updateSection(std::string cleanLine, std::string comment, std::string rightComment);
-				int addEntry(std::string cleanLine, std::string comment, std::string rightComment, INISection currSection);
+				INIItem addEntry(std::string cleanLine, std::string comment, std::string rightComment);
 
 			private:
 				INIItem parse(std::string line);

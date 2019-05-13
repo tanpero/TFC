@@ -33,6 +33,7 @@ namespace tfc
 
 			void INISection::setName(std::string _name)
 			{
+				debug()
 				name = _name;
 			}
 
@@ -64,6 +65,7 @@ namespace tfc
 			void INISection::pushItem(INIItem item)
 			{
 				items.push_back(item);
+				std::cout << "------ items.push_back() ------ \n" << items.empty() << std::endl;
 			}
 
 			INISection::INIItemIterator INISection::eraseItem(INIItemIterator item)
@@ -86,6 +88,7 @@ namespace tfc
 
 			std::vector<std::string> INISection::getKeys()
 			{
+				std::cout << this->items.size() << std::endl;
 				std::vector<std::string> keys;
 				for (INISection::INIItemIterator i = this->begin(); i != this->end(); ++i)
 				{
